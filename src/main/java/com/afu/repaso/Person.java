@@ -2,6 +2,7 @@ package com.afu.repaso;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Person {
 
@@ -24,6 +25,7 @@ public class Person {
 		this.birthDate = birthDate;
 		this.heightMts = heightMts;
 		this.phoneNumb = phoneNumb;
+		this.myPets=new ArrayList<Pet>();
 		this.calculateAge();
 	}
 
@@ -108,7 +110,6 @@ public class Person {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "Name: " + this.firstName + "\nLast name: " + this.lastname + "\nAge: " + this.age + "\nBirth date: "
 				+ this.birthDate;
 	}
@@ -126,21 +127,21 @@ public class Person {
 	 * Metodos de Mascotas de la persona
 	 */
 	
-	public Pet createPet(String name, String animalType, LocalDate birthDate, int age, String color) { // Recibir parametros
+	public Pet createPet(String name, String animalType, LocalDate birthDate, String color) { // Recibir parametros
 
-		Pet newPet = new Pet(name, animalType, birthDate, age, color); // Crear el objeto
+		Pet newPet = new Pet(name, animalType, birthDate, color); // Crear el objeto
 		this.myPets.add(newPet); // Agregando a la colección 
 		return newPet; 
 	}
 	
-	public Pet getPetById (int id) {
+	public Optional<Pet> getPetById (int id) {
 		// Para cada mascota de esta lista
 		for(Pet p : myPets) {
 			if (id == p.getId()) {
-				return p;
+				return Optional.of(p);
 			} 
 		}
-		return null;
+		return Optional.empty();
 	}
 	
 	public ArrayList<Pet> getPetByName (String name) { //Va a devolver una lista de mascotas

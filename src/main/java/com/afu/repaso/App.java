@@ -1,7 +1,7 @@
 package com.afu.repaso;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * Hello world!
@@ -9,33 +9,23 @@ import java.util.ArrayList;
  */
 public class App {
 	public static void main(String[] args) {
-		ArrayList<Person> personList = new ArrayList<Person>();
-		String lineText = "";
-
-		Person person1 = new Person("Andrea", "Fuentes", "1090448114", LocalDate.of(1992, 4, 9));
-		personList.add(person1);
-		Person person2 = new Person("Daniel", "Torres", "Cll 145-46-61", "1090431860", LocalDate.of(1991, 3, 14), 1.79f,
-				"5555555");
-		personList.add(person2);
+		//1. Crear una persona
 		
-		System.out.println(person1);
-		System.out.println(person2);
+		//2. Crear tres mascotas para esa persona
 		
-		System.out.println(personList.size());
+		//3. Buscar una mascota por ID
 		
-		System.out.println(personList.toString());
+		//4. Buscar una mascota por nombre
 		
-		for(int i=0;i<personList.size();i++) {
-			lineText += "....................\n"+personList.get(i).toString()+"\n";
-		}
+		//5. Actualizar
 		
-		System.out.println(lineText);
+		//6. Eliminar
+		Person p = new Person("Daniel", "Torres", "Test 123", "12349232", LocalDate.of(1991, 3, 14), 1.75F, "313892439043");
+		p.createPet("Nena", "Dog", LocalDate.of(2010, 9, 11), "White");
+		p.createPet("Lucy", "Dog", LocalDate.of(2009, 9, 11), "Gray");
+		Optional<Pet> nena = p.getPetById(1);
 		
-		lineText="";
-		for(Person p : personList) {
-			lineText += "--------------------------\n" + p.toString();
-		}
-		System.out.println(lineText);
-		
+		System.out.println(nena.get());
+		System.out.println(p.getPetByName("ucy"));
 	}
 }
