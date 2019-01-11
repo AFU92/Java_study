@@ -11,6 +11,7 @@ public class Person {
 		this.identification = identification;
 		this.birthDate = birthDate;
 		this.calculateAge();
+		this.myPets=new ArrayList<Pet>();
 	}
 
 	public Person(String firstName, String lastname, String address, String identification, LocalDate birthDate,
@@ -125,5 +126,33 @@ public class Person {
 	 * Metodos de Mascotas de la persona
 	 */
 	
+	public Pet createPet(String name, String animalType, LocalDate birthDate, int age, String color) { // Recibir parametros
+
+		Pet newPet = new Pet(name, animalType, birthDate, age, color); // Crear el objeto
+		this.myPets.add(newPet); // Agregando a la colección 
+		return newPet; 
+	}
+	
+	public Pet getPetById (int id) {
+		// Para cada mascota de esta lista
+		for(Pet p : myPets) {
+			if (id == p.getId()) {
+				return p;
+			} 
+		}
+		return null;
+	}
+	
+	public ArrayList<Pet> getPetByName (String name) { //Va a devolver una lista de mascotas
+		
+		ArrayList<Pet> foundPets = new ArrayList<Pet>(); // Inicializar lista de perros encontrados
+		
+		for(Pet p : myPets) {
+			if (p.getName().matches(".*" + name + ".*")) {
+				foundPets.add(p);
+			}
+		}
+		return foundPets;		
+	}
 	
 }
