@@ -126,9 +126,9 @@ public class Person {
 	 * Metodos de Mascotas de la persona
 	 */
 	
-	public Pet createPet(String name, String animalType, LocalDate birthDate, int age, String color) { // Recibir parametros
+	public Pet createPet(String name, String animalType, LocalDate birthDate, String color) { // Recibir parametros
 
-		Pet newPet = new Pet(name, animalType, birthDate, age, color); // Crear el objeto
+		Pet newPet = new Pet(name, animalType, birthDate, color); // Crear el objeto
 		this.myPets.add(newPet); // Agregando a la colección 
 		return newPet; 
 	}
@@ -153,6 +153,38 @@ public class Person {
 			}
 		}
 		return foundPets;		
+	}
+	// public:modificadorDeAcceso String:TipoDatoQueDevuelve updatePed:NombreDelMetodo (int...):ParametrosQueRecibe
+	public String updatePet (int id, String name, String animalType, LocalDate birthDate, String color) {
+		
+		Pet findedPet = getPetById(id);
+		
+		if (findedPet == null) {
+			return "Pet not found xD";
+		}
+		int indPet = myPets.indexOf(findedPet);
+		
+		findedPet.setName(name);
+		findedPet.setAnimalType(animalType);
+		findedPet.setBirthDate(birthDate);
+		findedPet.setColor(color);
+		
+		myPets.set(indPet, findedPet);
+				
+		return "Pet succesfully updated";
+	}
+	
+	public String deletePet (int id) {
+		
+		Pet findedPet = getPetById(id);
+		
+		if (findedPet == null) {
+			return "Pet not found D:";
+		}
+		
+		myPets.remove(findedPet);
+		
+		return "Pet succesfully deleted";
 	}
 	
 }

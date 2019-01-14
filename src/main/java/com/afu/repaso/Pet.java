@@ -13,13 +13,12 @@ public class Pet {
 	private int age;
 	private String color;
 
-	public Pet(String name, String animalType, LocalDate birthDate, int age, String color) {
+	public Pet(String name, String animalType, LocalDate birthDate, String color) {
 		
 		this.id=Pet.nextId++;
 		this.name = name;
 		this.animalType = animalType;
 		this.birthDate = birthDate;
-		this.age = age;
 		this.color = color;
 		this.calculateAge();
 	}
@@ -64,10 +63,6 @@ public class Pet {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	private void calculateAge() {
