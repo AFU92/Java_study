@@ -2,6 +2,7 @@ package com.afu.repaso;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Person {
 
@@ -133,14 +134,14 @@ public class Person {
 		return newPet; 
 	}
 	
-	public Pet getPetById (int id) {
+	public Optional<Pet> getPetById (int id) {
 		// Para cada mascota de esta lista
 		for(Pet p : myPets) {
 			if (id == p.getId()) {
-				return p;
+				return Optional.of(p);
 			} 
 		}
-		return null;
+		return Optional.empty();
 	}
 	
 	public ArrayList<Pet> getPetByName (String name) { //Va a devolver una lista de mascotas
@@ -157,32 +158,33 @@ public class Person {
 	// public:modificadorDeAcceso String:TipoDatoQueDevuelve updatePed:NombreDelMetodo (int...):ParametrosQueRecibe
 	public String updatePet (int id, String name, String animalType, LocalDate birthDate, String color) {
 		
-		Pet findedPet = getPetById(id);
+		Optional<Pet> findedPet = getPetById(id);
 		
-		if (findedPet == null) {
+		if (findedPet.isPresent()== false) {
 			return "Pet not found xD";
 		}
-		int indPet = myPets.indexOf(findedPet);
+		Pet petGetted = findedPet.get();
+		int indPet = myPets.indexOf(petGetted);
 		
-		findedPet.setName(name);
-		findedPet.setAnimalType(animalType);
-		findedPet.setBirthDate(birthDate);
-		findedPet.setColor(color);
+		petGetted.setName(name);
+		petGetted.setAnimalType(animalType);
+		petGetted.setBirthDate(birthDate);
+		petGetted.setColor(color);
 		
-		myPets.set(indPet, findedPet);
+		myPets.set(indPet, petGetted);
 				
 		return "Pet succesfully updated";
 	}
 	
 	public String deletePet (int id) {
 		
-		Pet findedPet = getPetById(id);
+		Optional<Pet> findedPet = getPetById(id);
 		
-		if (findedPet == null) {
+		if (findedPet.isPresent()== false) {
 			return "Pet not found D:";
 		}
 		
-		myPets.remove(findedPet);
+		myPets.remove(findedPet.get());
 		
 		return "Pet succesfully deleted";
 	}
